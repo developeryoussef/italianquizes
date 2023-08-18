@@ -1,20 +1,21 @@
-// ignore_for_file: unused_import, duplicate_import, unused_local_variable, unnecessary_null_comparison
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../../main.dart';
+import 'package:get/get.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
+import '../../controller/authservices.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mrs_geology/view/screens/signup.dart';
 import 'package:mrs_geology/view/screens/viewcontroller.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../controller/authservices.dart';
-import '../../main.dart';
+
+// ignore_for_file: unused_import, duplicate_import, unused_local_variable, unnecessary_null_comparison
+
 
 class Onboarding3Widget extends StatefulWidget {
   const Onboarding3Widget({Key? key}) : super(key: key);
@@ -193,12 +194,3 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
   }
 }
 
-class Onboarding3Model {
-  final unfocusNode = FocusNode();
-
-  void initState(BuildContext context) {}
-
-  void dispose() {
-    unfocusNode.dispose();
-  }
-}

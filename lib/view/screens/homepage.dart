@@ -5,6 +5,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mrs_geology/quizscreens/quiz/quiz_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:mrs_geology/quizscreens/quiz/components/body.dart';
 
 // ignore_for_file: unused_import, prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, sized_box_for_whitespace, avoid_unnecessary_containers, prefer_typing_uninitialized_variables, unused_local_variable, avoid_print, unnecessary_cast
 
