@@ -3,23 +3,20 @@ import 'question_card.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../model/constants.dart';
+import 'package:mrs_geology/model/Question.dart';
 import '../../../controller/quizcontroller.dart';
+
 // ignore_for_file: unused_import
 
-class Body extends StatefulWidget {
-  @override
-  State<Body> createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
+class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // So that we have acccess our controller
-
+// final QuizController quizController = Get.find();
     return GetX<QuizController>(
       init: QuizController(),
       builder: (quizController) {
-        quizController.getQuiz();
+        print("build");
         return Stack(
           children: [
             SafeArea(
@@ -33,53 +30,60 @@ class _BodyState extends State<Body> {
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: quizController.quiz.length,
-                      itemBuilder: (context, qustionindex) => Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                        padding: EdgeInsets.all(kDefaultPadding),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              quizController.quiz[qustionindex].title,
-                            ),
-                            SizedBox(height: kDefaultPadding / 2),
-                            ...List.generate(
-                              quizController.quiz[qustionindex].options.length,
-                              (index) {
-                                return RadioListTile(
-                                    value: index,
-                                    groupValue: quizController
-                                        .quiz[index].selectedOption,
-                                    activeColor: itGreen,
-                                    title: Text(quizController
-                                        .quiz[qustionindex].options[index]),
-                                    onChanged: (value) {
-                                      quizController.quiz[qustionindex]
-                                          .selectedOption = value;
-                                      print(value);
-                                      quizController.quizupdate();
-                                      print(quizController
-                                          .quiz[qustionindex].correctOption);
-                                      print(
-                                          'the sellected answer is ${quizController.quiz[qustionindex].selectedOption}');
-                                      quizController
-                                          .quiz[index].selectedOption = index;
-                                    });
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            MaterialButton(
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
+                      itemBuilder: (context, qustionindex) {
+                        Question currentQuetion =
+                            quizController.quiz[qustionindex];
+                        return Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                          padding: EdgeInsets.all(kDefaultPadding),
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(currentQuetion.title),
+                              SizedBox(height: kDefaultPadding / 2),
+                              ...List.generate(
+                                currentQuetion.options.length,
+                                (index) {
+                                  return RadioListTile(
+                                      value: index,
+                                      groupValue: currentQuetion.selectedOption,
+                                      activeColor: itGreen,
+                                      title:
+                                          Text(currentQuetion.options[index]),
+                                      onChanged: (value) {
+                                        currentQuetion.selectedOption = value;
+                                        print("Selected Answer => $value");
+                                        print(
+                                            "Corrected Answer => ${currentQuetion.correctOption}");
+                                        currentQuetion.selectedOption = index;
+                                        quizController.quiz.refresh();
+                                      });
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              MaterialButton(
+                                child: Text("data"),
+                                onPressed: () {
+                                  quizController.quiz.forEach((element) {
+                                    print(
+                                        element.options[element.correctOption]);
+                                  });
+                                  quizController.updateScore();
+                                  quizController.score;
+                                  print(
+                                      "your score is ${quizController.score}");
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
