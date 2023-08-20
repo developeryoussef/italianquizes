@@ -43,9 +43,18 @@ class QuizController extends GetxController {
         .toList();
   }
 
-  quizupdate() {
-    update();
+  int score = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getQuiz();
   }
 
-  int score = 0;
+  updateScore() {
+    score = 0;
+    quiz.forEach((element) {
+      if (element.correctOption == element.selectedOption) score++;
+    });
+  }
 }
